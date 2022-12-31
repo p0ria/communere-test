@@ -1,0 +1,21 @@
+:host {
+  #map {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  ::ng-deep {
+    .modal-dialog {
+      width: 22rem !important;
+    }
+
+    .modal-dialog .modal-content,
+    .modal-body-wrapper {
+      padding: 0;
+    }
+
+    .modal-header--accessible {
+      display: none;
+    }
+  }
+}

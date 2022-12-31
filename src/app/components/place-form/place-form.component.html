@@ -1,0 +1,81 @@
+<form [formGroup]="form" (ngSubmit)="save()">
+  <div class="card">
+    <div class="title">
+      Share location
+      <button type="button" class="btn btn-icon" (click)="close()">
+        <cds-icon shape="window-close" size="md" inverse></cds-icon>
+      </button>
+    </div>
+    <div class="content">
+      <div class="row">
+        <span class="title">Location name:</span>
+        <input
+          class="value"
+          formControlName="name"
+          clrInput
+          [appAutoFocus]="true"
+        />
+      </div>
+
+      <div class="row">
+        <span class="title">Location on map:</span>
+        <div #mapContainer class="value map"></div>
+      </div>
+
+      <div class="row">
+        <span class="title">Location type:</span>
+        <select class="value" formControlName="type" clrSelect>
+          <option *ngFor="let type of PlaceTypes" [value]="type">
+            {{ type }}
+          </option>
+        </select>
+      </div>
+
+      <div class="row">
+        <span class="title">Logo:</span>
+        <div class="value logo">
+          <div class="card preview" [hidden]="!form.value.logo">
+            <img [src]="form.value.logo" />
+            <button type="button" class="btn btn-icon" (click)="removeLogo()">
+              <cds-icon
+                shape="window-close"
+                size="md"
+                status="danger"
+              ></cds-icon>
+            </button>
+          </div>
+          <label class="card" [hidden]="form.value.logo" for="file">
+            <div class="title">Upload</div>
+            <div class="icon">
+              <cds-icon shape="upload" size="xl" status="info"></cds-icon>
+            </div>
+          </label>
+          <input
+            #logoInput
+            id="file"
+            type="file"
+            accept="image/*"
+            (change)="onLogoSelect($any($event.target).files)"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <button
+      class="btn btn-primary"
+      [disabled]="form.invalid"
+      [clrLoading]="isSaving$ | async"
+    >
+      Save
+    </button>
+    <button
+      class="btn"
+      type="button"
+      [disabled]="isSaving$ | async"
+      (click)="close()"
+    >
+      Close
+    </button>
+  </div>
+</form>

@@ -28,9 +28,12 @@
               "src/assets"
             ],
             "styles": [
+              "mapbox-gl/dist/mapbox-gl.css",
+              "node_modules/@clr/ui/clr-ui.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": ["mapbox-gl"]
           },
           "configurations": {
             "production": {

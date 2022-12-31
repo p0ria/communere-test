@@ -1,0 +1,17 @@
+<div id="map">
+  <app-place
+    *ngFor="let place of placeService.places$ | async"
+    [map]="map"
+    [place]="place"
+  ></app-place>
+</div>
+
+<clr-modal [(clrModalOpen)]="addPlaceFormOpen" [clrModalStaticBackdrop]="false">
+  <div class="modal-body">
+    <app-place-form
+      *ngIf="addPlaceFormOpen"
+      [location]="addPlaceFormLocation"
+      ($close)="addPlaceFormOpen = false"
+    ></app-place-form>
+  </div>
+</clr-modal>

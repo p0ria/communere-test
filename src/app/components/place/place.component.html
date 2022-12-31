@@ -1,0 +1,15 @@
+<form class="popup" [formGroup]="form" (ngSubmit)="save()">
+  <div class="title">{{ place.name }}</div>
+  <div *ngIf="place.logo" class="preview">
+    <img [src]="place.logo" />
+  </div>
+  <textarea
+    class="description"
+    formControlName="description"
+    placeholder="Write about this place..."
+  ></textarea>
+  <div class="actions">
+    <button class="btn btn-sm btn-primary">Edit</button>
+    <button class="btn btn-sm" type="button" (click)="close()">Close</button>
+  </div>
+</form>
