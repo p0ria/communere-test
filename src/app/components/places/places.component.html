@@ -1,9 +1,14 @@
 <div id="map">
-  <app-place
-    *ngFor="let place of placeService.places$ | async"
-    [map]="map"
-    [place]="place"
-  ></app-place>
+  <ng-container *ngIf="placeService.places$ | async as places">
+    <app-place
+      *ngFor="let place of places"
+      [map]="map"
+      [place]="place"
+    ></app-place>
+    <div *ngIf="!places.length" class="empty">
+      You can add new locations by right-click on map 🌿
+    </div>
+  </ng-container>
 </div>
 
 <clr-modal [(clrModalOpen)]="addPlaceFormOpen" [clrModalStaticBackdrop]="false">

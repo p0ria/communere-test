@@ -2,6 +2,19 @@
   #map {
     height: 100vh;
     width: 100vw;
+    position: relative;
+
+    .empty {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      border: 8px;
+      padding: 8px;
+      border-radius: 8px;
+      color: white;
+      background: rgba(106, 46, 121, 0.6);
+      z-index: 1000;
+    }
   }
 
   ::ng-deep {
