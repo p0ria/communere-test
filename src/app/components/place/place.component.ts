@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as mapboxgl from 'mapbox-gl';
+import { BehaviorSubject, finalize } from 'rxjs';
 import { PlaceService } from 'src/app/services/place.service';
 import { Place } from 'src/app/types/place.type';
 
@@ -21,6 +22,7 @@ export class PlaceComponent implements OnInit {
   @Input() place: Place;
   form: FormGroup;
   marker: mapboxgl.Marker;
+  isSaving$ = new BehaviorSubject(false);
 
   constructor(
     private elRef: ElementRef<HTMLElement>,
@@ -43,8 +45,14 @@ export class PlaceComponent implements OnInit {
   }
 
   save() {
-    this.placeService.editPlace({ ...this.place, ...this.form.value });
-    this.close();
+    this.isSaving$.next(true);
+    this.placeService
+      .editPlace({ ...this.place, ...this.form.value })
+      .pipe(finalize(() => this.isSaving$.next(false)))
+      .subscribe({
+        next: () => this.close(),
+        error: (err) => alert(err),
+      });
   }
 
   close() {

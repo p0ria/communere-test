@@ -9,7 +9,16 @@
     placeholder="Write about this place..."
   ></textarea>
   <div class="actions">
-    <button class="btn btn-sm btn-primary">Edit</button>
-    <button class="btn btn-sm" type="button" (click)="close()">Close</button>
+    <button class="btn btn-sm btn-primary" [clrLoading]="isSaving$ | async">
+      Edit
+    </button>
+    <button
+      class="btn btn-sm"
+      type="button"
+      [disabled]="isSaving$ | async"
+      (click)="close()"
+    >
+      Close
+    </button>
   </div>
 </form>
